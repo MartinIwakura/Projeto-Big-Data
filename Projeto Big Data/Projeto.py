@@ -98,7 +98,7 @@ def classificar_nova_entrada(clf, X_columns):
         print("Erro na classificação:", e)
 
 
-def classificar_arvore():
+def executar_classificacao():
     df = pd.read_csv('DadosVen.csv')
     df_encoded = pd.get_dummies(df, columns=['Forma_Pagamento', 'Parcelas'])
 
@@ -198,7 +198,7 @@ def classificar_nova_entrada_svm(clf, X_columns):
         print("Erro ao inserir os dados:", e)
 
 
-def classificar_arvore_svm():
+def executar_classificacao_svm():
     df = pd.read_csv('DadosVen.csv')
     df_encoded = pd.get_dummies(df, columns=['Forma_Pagamento', 'Parcelas'])
 
@@ -210,7 +210,7 @@ def classificar_arvore_svm():
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=1)
 
     # Treinamento do modelo
-    clf = svm.SVC(gamma = 'auto')
+    clf = make_pipeline(StandardScaler(), svm.SVC(gamma='auto'))
     clf.fit(X_train, y_train)
 
     classificar_nova_entrada_svm(clf, X.columns)
@@ -227,7 +227,7 @@ def mostrar_menu():
     print("3. Sair")
 
 def arvore_decisao():
-    print("\n** Árvore de Decisão **")
+    print("\n ---------- Árvore de Decisão ----------")
     while True:
         print("\n1. Mostrar o desempenho")
         print("2. Mostrar a árvore")
@@ -242,22 +242,22 @@ def arvore_decisao():
 
 
         elif opcao == '2':
-          print("\nExibindo a Árvore de Decisão:")
+          print("\n ---------- Exibindo a Árvore de Decisão ----------:")
           mostrar_arvore()
 
         elif opcao == '3':
-            print("Classificando uma nova entrada:")
+            print(" ---------- Classificando uma nova entrada:  ----------")
             print("")
-            classificar_arvore()
+            executar_classificacao()
 
         elif opcao == '4':
-            print("Saindo da Árvore de Decisão...")
+            print(" ---------- Saindo da Árvore de Decisão... ----------")
             break
         else:
             print("Opção inválida, tente novamente.")
 
 def executar_svm():
-    print("\n** SVM **")
+    print("\n--------- SVM ---------")
     while True:
         print("\n1. Mostrar o desempenho")
         print("2. Classificar nova entrada")
@@ -271,7 +271,7 @@ def executar_svm():
 
         elif opcao == '2':
             print("Classificando uma nova entrada com SVM:")
-            classificar_arvore_svm()
+            executar_classificacao_svm()
 
         elif opcao == '3':
             print("Saindo do SVM...")
