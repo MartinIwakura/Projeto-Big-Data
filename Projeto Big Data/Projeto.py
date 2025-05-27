@@ -33,8 +33,9 @@ def testar_desempenho():
 
     # Fazer previsões e medir desempenho
     y_prediction = clf.predict(X_test)
+    acuracia = accuracy_score(y_test, y_prediction) * 100
     print("\nDesempenho da Árvore de Decisão:")
-    print("Acurácia:", accuracy_score(y_test, y_prediction))
+    print("Acurácia: {:.2f}%".format(acuracia))
 
 
 # Mostrar Arvore
@@ -64,7 +65,7 @@ def mostrar_arvore():
     # Plotar a árvore com os nomes corretos das features
     plt.figure(figsize=(20, 10))
     tree.plot_tree(clf, filled=True, feature_names=X.columns.tolist(), class_names=['Pendente', 'Pago'])
-    plt.title("Árvore de Decisão - Todas as Variáveis")
+    plt.title("Árvore de Decisão")
     plt.show()
 
 
@@ -144,8 +145,9 @@ def testar_svm():
 
     # Fazer previsões e medir desempenho
     y_prediction = clf.predict(X_test)
+    acuracia = accuracy_score(y_test, y_prediction) * 100
     print("\nDesempenho do SVM:")
-    print("Acurácia:", accuracy_score(y_test, y_prediction))
+    print("Acurácia: {:.2f}%".format(acuracia))
 
 
 
